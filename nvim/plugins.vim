@@ -21,6 +21,9 @@ Plug 'bronson/vim-trailing-whitespace'
 " quoting/parenthesizing made simple; e.g. ysiw) to wrap word in parens
 Plug 'tpope/vim-surround'
 
+" Aligning text
+Plug 'godlygeek/tabular'
+
 " }
 
 " Git -- Tools for using git and github {
@@ -63,6 +66,10 @@ Plug 'keith/rspec.vim'
 Plug 'tpope/vim-rake', { 'for': ['ruby', 'rake'] }
 Plug 'tpope/vim-projectionist', { 'for': ['ruby', 'rake'] }
 " }
+
+" nginx {
+Plug 'chr4/nginx.vim'
+"
 
 Plug 'sheerun/vim-polyglot'
 

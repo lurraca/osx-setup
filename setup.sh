@@ -11,6 +11,13 @@ install_local_scripts() {
 	ln -svnfF "${PWD}/bin/" "${local_scripts_path}"
 }
 
+ensure_brew_exists() {
+  echo "Ensuring brew exists..."
+  if [[ ! -x /usr/local/bin/brew ]] ; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+}
+
 install_brew_utils() {
 	echo "Installing Homebrew Utilities"
 	brew update
@@ -40,6 +47,18 @@ setup_vim() {
 	nvim '+GoInstallBinaries' '+qall'
 }
 
+setup_starship() {
+	echo "Setting up Starship.rs config"
+	mkdir -p "${HOME}/.config"
+	install_symlink "${PWD}/starship.toml" "${HOME}/.config/starship.toml"
+}
+
+setup_tmux() {
+	echo "Setting up tmux config"
+	mkdir -p "${HOME}/.config"
+	install_symlink "${PWD}/tmux.conf" "${HOME}/.config/tmux.conf"
+}
+
 install_symlink() {
     local src="$1"
     local target="$2"
@@ -54,11 +73,14 @@ install_symlink() {
 }
 
 main() {
+	ensure_brew_exists
 	install_brew_utils
 	install_local_scripts
 	set_bash_profile
 	setup_ruby
 	setup_vim
+	setup_starship
+  setup_tmux
 	echo -n "\nSetup has finished."
 }
 
